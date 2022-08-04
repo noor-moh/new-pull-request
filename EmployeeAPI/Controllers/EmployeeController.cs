@@ -36,7 +36,7 @@ namespace EmployeeAPI.Controllers
         {
             var manager = EmployeeData.Employees.FirstOrDefault(x => x.Id == managerId);
             var employee = (Developer)EmployeeData.Employees.FirstOrDefault(x => x.Id == employeeId);
-            employee.SetManager((Manager)manager);
+            employee.SetManager((LeadDeveloper)manager);
         }
     }
 }
