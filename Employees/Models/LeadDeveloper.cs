@@ -1,15 +1,21 @@
 ﻿namespace Employees.Models
 {
-    public class LeadDeveloper :  EmployeeWithManager
+    public class LeadDeveloper : Employee, IManager
     {
         /// <summary>
-        /// string name, double salary 
+        /// int id, double salary 
         /// </summary>
         /// <param name="name"></param>
         /// <param name="salary"></param>
-        public LeadDeveloper(string name, double salary) : base(name, salary)
+        public LeadDeveloper(int id, decimal salary) : base(id, salary)
         {
         }
 
+        private Manager manager;
+        public Employee Manager => manager;
+        public void SetManager(Employee Manager)
+        {
+            this.manager = (Manager)Manager;
+        }
     }
 }

@@ -1,10 +1,16 @@
 ﻿namespace Employees.Models
 {
-    public class HumanResources :  EmployeeWithManager
+    public class HumanResources : Employee, IManager
     {
-        public HumanResources(string name, double salary) : base(name, salary)
+        public HumanResources(int id, decimal salary) : base(id, salary)
         {
         }
+        private  Manager manager;
+        public Employee Manager => manager;
 
+        public void SetManager(Employee Manager)
+        {
+            manager = (Manager)Manager;
+        }
     }
 }

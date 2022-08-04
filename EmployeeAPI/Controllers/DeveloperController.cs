@@ -1,4 +1,5 @@
-﻿using Employees.Models;
+﻿using Employees.Data;
+using Employees.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,35 +9,34 @@ using System.Threading.Tasks;
 namespace EmployeeAPI.Controllers
 {
     /// <summary>
-    ///  Developers Controller
+    ///  Employees Controller
     /// </summary>
     [Route("api/v1/developer")]
     [Produces("application/json")]
     [ApiController]
-    public class DeveloperController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
         /// <summary>
         /// Calculate Developers salary : double
         /// </summary>
-        /// <param name="salary">: double</param>
+        /// <param name="Id">: int</param>
         /// <returns>salary value</returns>
         [HttpGet("calculate-salary")]
-        public double CalculateSalary([FromQuery] double salary)
+        public decimal CalculateSalary([FromQuery] int Id)
         {
-            var dev = new Developer("Noor", salary);
-            return dev.Salary;
+            return EmployeeData.Employees.FirstOrDefault(x => x.Id == Id).Salary;
         }
 
         /// <summary>
-        /// Set manager of type LeadDeveoper
         /// </summary>
-        /// <param name="manager"> manager value </param>
+        /// <param name="managerId ">  </param>
+        /// <param name="employeeId"></param>
         [HttpPost("set-manager")]
-        public LeadDeveloper SetEmployeeManager([FromBody] LeadDeveloper manager)
+        public void SetEmployeeManager([FromQuery] int managerId, [FromQuery] int employeeId)
         {
-            var dev = new Developer("Zack", 1000);
-            dev.Manager = manager;
-            return dev.Manager;
+            var manager = EmployeeData.Employees.FirstOrDefault(x => x.Id == managerId);
+            var employee = (Developer)EmployeeData.Employees.FirstOrDefault(x => x.Id == employeeId);
+            employee.SetManager((Manager)manager);
         }
     }
 }

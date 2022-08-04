@@ -1,16 +1,22 @@
 ﻿namespace Employees.Models
 {
-    public class Sales :  EmployeeWithManager
+    public class Sales : Employee, IManager
     {
-        private readonly double target = 1000;
-        private readonly double sales;
+        private readonly decimal target = 1000;
+        private readonly decimal sales;
 
-        public Sales(string name, double salary, double sales) : base(name, salary)
+        public Sales(int id, decimal salary, decimal sales) : base(id, salary)
         {
             this.sales = sales;
         }
 
-        public override double Salary => sales > target ? base.Salary + 0.15 * sales : base.Salary;
+        public override decimal GetSalary() => sales > target ? base.Salary + (decimal)0.15 * sales : base.Salary;
 
+        private Manager manager;
+        public Employee Manager => manager;
+        public void SetManager(Employee Manager)
+        {
+            this.manager = (Manager)Manager;
+        }
     }
 }

@@ -3,18 +3,18 @@
 namespace Employees.Models
 {
     /// <summary>
-    /// string name, double salary,double bonus
+    /// int id, double salary,double bonus
     /// </summary>
     public class Manager : Employee
     {
-        private readonly double bonus;
+        private readonly decimal bonus;
 
-        public Manager(string name, double salary, double bonus) : base(name, salary)
+        public Manager(int id, decimal salary, decimal bonus) : base(id, salary)
         {
             this.bonus = bonus;
         }
 
-        public override double Salary => base.Salary + bonus;
+        public override decimal GetSalary() => base.Salary + bonus;
 
     }
 }

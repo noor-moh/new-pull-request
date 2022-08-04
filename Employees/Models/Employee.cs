@@ -4,28 +4,26 @@ namespace Employees.Models
 {
     public abstract class Employee
     {
-        private readonly string name;
-        private readonly double salary;
+        private readonly int id;
+        private readonly decimal salary;
 
-        public Employee(string name, double salary)
+        public Employee(int id, decimal salary)
         {
-            this.name = name;
+            this.id = id;
             this.salary = salary;
         }
 
-        public string Name => name;
+        public int Id => id;
+        public decimal Salary => salary;
 
-        public virtual double Salary => salary;
+        public virtual decimal GetSalary() => salary;
 
     }
-    public abstract class EmployeeWithManager : Employee
+    public interface IManager
     {
 
-        public EmployeeWithManager(string name, double salary) : base(name, salary)
-        {
-        }
-        public Manager Manager { set; get; }
-
+        public Employee Manager { get; }
+        public void SetManager(Employee Manager);
     }
 
 
